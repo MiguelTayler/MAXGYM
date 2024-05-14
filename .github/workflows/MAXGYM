@@ -1,0 +1,33 @@
+name: Deploy to GitHub Pages
+
+# Controla cuándo se ejecutará el flujo de trabajo
+on:
+  push:
+    branches:
+      - MAXGYM 
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      
+      - name: Install Dependencies
+        run: npm install
+
+     
+      - name: Build
+        run: npm run build
+
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: Sitio sin nombre 2
+
