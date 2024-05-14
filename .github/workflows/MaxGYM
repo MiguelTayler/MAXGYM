@@ -1,0 +1,31 @@
+name: Deploy to GitHub Pages
+
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Install Dependencies
+        run: npm install
+
+
+      - name: Build
+        run: npm run build
+
+      # Despliega tu sitio web a GitHub Pages
+  
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }} # Asegúrate de configurar este secreto en la configuración de tu repositorio
+   
+          FOLDER: dist # Cambia esto según la carpeta donde estén los archivos de tu sitio web
